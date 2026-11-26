@@ -1,7 +1,7 @@
 # Applied Activity 5: Harvest Board (Individual)
 
-**Name:** YOUR FULL NAME
-**GitHub username:** YOUR GITHUB USERNAME
+**Name:** Carter Atkins
+**GitHub username:** CC09092025
 **Repository URL:** https://github.com/...
 
 > This report is my own individual work. I built my own repository, my own code and my own report.
@@ -11,7 +11,17 @@
 ## Mission 0: Set Up and Open the Case
 
 ```text
-(git config --global -l)
+~/Projects/AppliedActivity-5 main
+❯ git config --global -l
+user.name=Carter Atkins
+user.email=a00323762@mycambrian.ca
+credential.https://github.com.helper=
+credential.https://github.com.helper=!/usr/bin/gh auth git-credential
+credential.https://gist.github.com.helper=
+credential.https://gist.github.com.helper=!/usr/bin/gh auth git-credential
+core.editor=zed --wait
+init.defaultbranch=main
+credential.helper=store
 ```
 
 ```text
@@ -98,14 +108,14 @@
 
 **bug-report.md (paste the whole table):**
 
-| # | What I saw | Where I found it | Cause | Fix |
-|---|---|---|---|---|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
-| 4 | | | | |
-| 5 | | | | |
-| 6 | | | | |
+| #   | What I saw | Where I found it | Cause | Fix |
+| --- | ---------- | ---------------- | ----- | --- |
+| 1   |            |                  |       |     |
+| 2   |            |                  |       |     |
+| 3   |            |                  |       |     |
+| 4   |            |                  |       |     |
+| 5   |            |                  |       |     |
+| 6   |            |                  |       |     |
 
 ```text
 (one red Console message I saw)
@@ -165,4 +175,3 @@
 ```text
 (challenge, code and Console proof)
 ```
-
