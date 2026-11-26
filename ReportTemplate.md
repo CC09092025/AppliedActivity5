@@ -84,7 +84,13 @@ Showing 1 of 7 items for query "Canned vegetables"
 My item is Canned Vegetables, therefore the 3 of 7 is correct, not 2 of 7.
 
 ```text
-(git log --oneline)
+~/Projects/AppliedActivity-5 feat/harvest-board
+❯ git log --oneline
+9487705 (HEAD -> feat/harvest-board) Implement interactive item search and filtering
+ce60aab Added Canned Vegetables and script.js module to index page
+eb89092 (main) Updated Report Template
+8e37baa (origin/main) Add README for Harvest Board
+b33616d Added initial files
 ```
 
 **Explain (why does an empty search box show every item?):** An empty search query is considered a match for every string because every string contains an empty substring.
@@ -92,7 +98,9 @@ My item is Canned Vegetables, therefore the 3 of 7 is correct, not 2 of 7.
 **Checkpoint 1 (git log --oneline | wc -l, expect 5):**
 
 ```text
-(paste)
+~/Projects/AppliedActivity-5 feat/harvest-board
+❯ git log --oneline | wc -l
+5
 ```
 
 ## Mission 2: The Pledge Form

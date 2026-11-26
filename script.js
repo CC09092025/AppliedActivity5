@@ -3,6 +3,16 @@ const search = document.querySelector("#item-search");
 const form = document.querySelector("#item-search-form");
 const count = document.querySelector("#item-count");
 const noItems = document.querySelector("#no-items");
+const donationItem = document.querySelector("#donation-item");
+
+for (const item of elements) {
+  const productName = item.querySelector("h3").textContent.trim();
+
+  const option = document.createElement("option");
+  option.textContent = productName;
+
+  donationItem.appendChild(option);
+}
 
 function filterItems(searchText) {
   totalCount = elements.length;
