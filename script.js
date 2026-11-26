@@ -9,6 +9,10 @@ const donationItem = document.querySelector("#donation-item");
 const donationQty = document.querySelector("#donation-qty");
 const donationMessage = document.querySelector("#donation-message");
 const donationList = document.querySelector("#donation-list");
+const totalPledgedElement = document.querySelector("#total-pledged");
+const receivedCountElement = document.querySelector("#received-count");
+
+let totalPledged = 0;
 
 for (const item of elements) {
   const productName = item.querySelector("h3").textContent.trim();
@@ -20,8 +24,9 @@ for (const item of elements) {
 }
 
 function filterItems(searchText) {
-  totalCount = elements.length;
+  const totalCount = elements.length;
   let itemCount = 0;
+
   for (const item of elements) {
     let productName = item.querySelector("h3").textContent;
     productName = productName.toLowerCase().trim();
@@ -40,10 +45,20 @@ function filterItems(searchText) {
   } else {
     noItems.classList.toggle("hidden", true);
   }
+
   count.textContent = `Showing ${itemCount} of ${totalCount} items`;
+
   console.log(
     `Showing ${itemCount} of ${totalCount} items for query "${searchText}"`,
   );
+}
+
+function updateTallies() {
+  const pledges = donationList.querySelectorAll("li");
+  const receivedCount = donationList.querySelectorAll("li.done").length;
+
+  totalPledgedElement.textContent = `Total pledged: ${totalPledged} items`;
+  receivedCountElement.textContent = `Received: ${receivedCount} of ${pledges.length} pledges`;
 }
 
 search.addEventListener("input", () => {
@@ -87,9 +102,30 @@ donationForm.addEventListener("submit", (event) => {
   donationMessage.textContent = "";
 
   const pledge = document.createElement("li");
-  pledge.textContent = `${name}: ${quantity} x ${donationItem.value}`;
 
+  const label = document.createElement("label");
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+
+  const span = document.createElement("span");
+  span.textContent = `${name}: ${quantity} x ${donationItem.value}`;
+
+  label.appendChild(checkbox);
+  label.appendChild(span);
+
+  pledge.appendChild(label);
   donationList.appendChild(pledge);
+
+  // Handle received status
+  checkbox.addEventListener("change", () => {
+    pledge.classList.toggle("done", checkbox.checked);
+    updateTallies();
+  });
+
+  // Update total
+  totalPledged += quantity;
+  updateTallies();
 
   // Reset form
   donorName.value = "";
@@ -99,3 +135,4 @@ donationForm.addEventListener("submit", (event) => {
 
 // Run once when the page loads
 filterItems(search.value);
+updateTallies();

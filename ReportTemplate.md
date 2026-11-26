@@ -106,7 +106,47 @@ b33616d Added initial files
 ## Mission 2: The Pledge Form
 
 ```text
-(the donation part of script.js)
+donationForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  // Retrieve and clean input
+  const name = donorName.value.trim();
+  const quantityText = donationQty.value.trim();
+
+  // Validate name
+  if (name === "") {
+    donationMessage.textContent = "Please type your name.";
+    return;
+  }
+
+  // Validate quantity is present
+  if (quantityText === "") {
+    donationMessage.textContent = "Please type a quantity.";
+    return;
+  }
+
+  // Validate quantity
+  const quantity = Number(quantityText);
+
+  if (!Number.isInteger(quantity) || quantity < 1 || quantity > 500) {
+    donationMessage.textContent =
+      "Quantity must be a whole number from 1 to 500.";
+    return;
+  }
+
+  // Create and append pledge
+  donationMessage.textContent = "";
+
+  const pledge = document.createElement("li");
+  pledge.textContent = `${name}: ${quantity} x ${donationItem.value}`;
+
+  donationList.appendChild(pledge);
+
+  // Reset form
+  donorName.value = "";
+  donationQty.value = "";
+  donorName.focus();
+});
 ```
 
 ```text
@@ -122,15 +162,25 @@ document.querySelector("#donation-list").textContent.trim()
 ```
 
 ```text
-(git log --oneline)
+~/Projects/AppliedActivity-5 feat/harvest-board
+❯ git log --oneline
+5a4f009 (HEAD -> feat/harvest-board) Added donation validation and submission
+865f8a6 Populate the item dropdown
+9487705 Implement interactive item search and filtering
+ce60aab Added Canned Vegetables and script.js module to index page
+eb89092 (main) Updated Report Template
+8e37baa (origin/main) Add README for Harvest Board
+b33616d Added initial files
 ```
 
-**Explain (why trim() before checking the name, and why textContent and not innerHTML?):**
+**Explain (why trim() before checking the name, and why textContent and not innerHTML?):** `.trim()` removes leading and trailing whitespace so empty or space-only inputs are rejected, while `textContent` displays user input as plain text rather than interpreting it as HTML, helping prevent XSS attacks.
 
 **Checkpoint 2 (expect 7):**
 
 ```text
-(paste)
+~/Projects/AppliedActivity-5 feat/harvest-board 40s
+❯ git log --oneline | wc -l
+7
 ```
 
 ## Mission 3: Tick It Off and Count It
