@@ -2,7 +2,7 @@
 
 **Name:** Carter Atkins
 **GitHub username:** CC09092025
-**Repository URL:** https://github.com/...
+**Repository URL:** https://github.com/CC09092025/AppliedActivity5/
 
 > This report is my own individual work. I built my own repository, my own code and my own report.
 
@@ -25,14 +25,20 @@ credential.helper=store
 ```
 
 ```text
-(git remote -v)
+~/Projects/AppliedActivity-5 main 11s
+❯ git remote -v
+origin  https://github.com/CC09092025/AppliedActivity5.git (fetch)
+origin  https://github.com/CC09092025/AppliedActivity5.git (push)
 ```
 
 ```text
-(git log --oneline : 2 commits)
+~/Projects/AppliedActivity-5 main
+❯ git log --oneline
+8e37baa (HEAD -> main, origin/main) Add README for Harvest Board
+b33616d Added initial files
 ```
 
-- Issue #1: https://github.com/...
+- Issue #1: https://github.com/CC09092025/AppliedActivity5/issues/1
 
 ## Mission 1: The Live Item Finder
 
