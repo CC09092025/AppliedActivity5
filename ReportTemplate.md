@@ -110,11 +110,15 @@ b33616d Added initial files
 ```
 
 ```text
-(options.length, and the #donation-message text after abc, 501 and 2.5)
+document.querySelector("#donation-item").options.length
+7
 ```
 
+✅ "Quantity must be a whole number from 1 to 500." appears when inputting "abc" or "501" as the quantity.
+
 ```text
-(#donation-list text after my own pledge and after the <b>Ana</b> pledge)
+document.querySelector("#donation-list").textContent.trim()
+"Carter: 200 x Canned beans"
 ```
 
 ```text
