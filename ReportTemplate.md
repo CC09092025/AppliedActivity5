@@ -43,18 +43,51 @@ b33616d Added initial files
 ## Mission 1: The Live Item Finder
 
 ```text
-(the finder part of script.js: cat script.js)
+function filterItems(searchText) {
+  totalCount = elements.length;
+  let itemCount = 0;
+  for (const item of elements) {
+    let productName = item.querySelector("h3").textContent;
+    productName = productName.toLowerCase().trim();
+    const searchQuery = searchText.toLowerCase().trim();
+
+    if (productName.includes(searchQuery)) {
+      item.classList.toggle("hidden", false);
+      itemCount += 1;
+    } else {
+      item.classList.toggle("hidden", true);
+    }
+  }
+
+  if (itemCount === 0) {
+    noItems.classList.toggle("hidden", false);
+  } else {
+    noItems.classList.toggle("hidden", true);
+  }
+  count.textContent = `Showing ${itemCount} of ${totalCount} items`;
+  console.log(`Showing ${itemCount} of ${totalCount} items`);
+  console.log(
+    `Showing ${itemCount} of ${totalCount} items for query "${searchText}"`,
+  );
+}
 ```
 
 ```text
-(Console answers for each row of the test table: load, rice, CANNED, zzz, three spaces, my own item)
+Showing 7 of 7 items for query ""
+Showing 1 of 7 items for query "rice"
+Showing 3 of 7 items for query "CANNED"
+Showing 0 of 7 items for query "zzz"
+Showing 7 of 7 items for query "   "
+Showing 1 of 7 items for query "Canned vegetables"
 ```
+
+My item is Canned Vegetables, therefore the 3 of 7 is correct, not 2 of 7.
 
 ```text
 (git log --oneline)
 ```
 
-**Explain (why does an empty search box show every item?):**
+**Explain (why does an empty search box show every item?):** An empty search query is considered a match for every string because every string contains an empty substring.
 
 **Checkpoint 1 (git log --oneline | wc -l, expect 5):**
 
