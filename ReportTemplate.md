@@ -186,46 +186,137 @@ b33616d Added initial files
 ## Mission 3: Tick It Off and Count It
 
 ```text
-(the tick box and tally part of script.js)
+const totalPledgedElement = document.querySelector("#total-pledged");
+const receivedCountElement = document.querySelector("#received-count");
+
+let totalPledged = 0;
+
+function updateTallies() {
+  const pledges = donationList.querySelectorAll("li");
+  const receivedCount = donationList.querySelectorAll("li.done").length;
+
+  totalPledgedElement.textContent = `Total pledged: ${totalPledged} items`;
+  receivedCountElement.textContent = `Received: ${receivedCount} of ${pledges.length} pledges`;
+}
+
+...
+
+const pledge = document.createElement("li");
+
+const label = document.createElement("label");
+
+const checkbox = document.createElement("input");
+checkbox.type = "checkbox";
+
+const span = document.createElement("span");
+span.textContent = `${name}: ${quantity} x ${donationItem.value}`;
+
+label.appendChild(checkbox);
+label.appendChild(span);
+
+pledge.appendChild(label);
+donationList.appendChild(pledge);
+
+// Handle received status
+checkbox.addEventListener("change", () => {
+  pledge.classList.toggle("done", checkbox.checked);
+  updateTallies();
+});
+
+...
+
+totalPledged += quantity;
+updateTallies();
+
+// Run once when the page loads
+filterItems(search.value);
+updateTallies();
 ```
 
 ```text
-(#total-pledged and #received-count after tests 1, 2, 3 and 4)
+On Page (Re)Load
+document.querySelector("#total-pledged").textContent
+"Total pledged: 0 items"
+document.querySelector("#received-count").textContent
+"Received: 0 of 0 pledges"
+
+After 2 Pledges
+document.querySelector("#total-pledged").textContent
+"Total pledged: 20 items"
+document.querySelector("#received-count").textContent
+"Received: 0 of 2 pledges"
+
+Ticking First Pledge
+document.querySelector("#total-pledged").textContent
+"Total pledged: 20 items"
+document.querySelector("#received-count").textContent
+"Received: 1 of 2 pledges"
+
+Unticking First Pledge
+document.querySelector("#total-pledged").textContent
+"Total pledged: 20 items"
+document.querySelector("#received-count").textContent
+"Received: 0 of 2 pledges"
+
+After 3 Pledges and Ticking Third Pledge
+document.querySelector("#total-pledged").textContent
+"Total pledged: 50 items"
+document.querySelector("#received-count").textContent
+"Received: 1 of 3 pledges"
 ```
 
 ```text
-(git log --oneline)
+~/Projects/AppliedActivity-5 feat/harvest-board*
+❯ git log --oneline
+aa1a342 (HEAD -> feat/harvest-board) Added checkbox for pledges
+5a4f009 Added donation validation and submission
+865f8a6 Populate the item dropdown
+9487705 Implement interactive item search and filtering
+ce60aab Added Canned Vegetables and script.js module to index page
+eb89092 (main) Updated Report Template
+8e37baa (origin/main) Add README for Harvest Board
+b33616d Added initial files
 ```
 
-**Explain (why is the total a let while the element variables are const?):**
+**Explain (why is the total a let while the element variables are const?):** `totalPledged` uses `let` because its value changes whenever a new pledge is added, while the element variables use `const` because their references to the HTML elements never change.
 
 **Checkpoint 3 (expect 8):**
 
 ```text
-(paste)
+~/Projects/AppliedActivity-5 feat/harvest-board*
+❯ git log --oneline | wc -l
+8
 ```
 
 ## Mission 4: Rescue the Sign-Up Page
 
 **bug-report.md (paste the whole table):**
 
-| #   | What I saw | Where I found it | Cause | Fix |
-| --- | ---------- | ---------------- | ----- | --- |
-| 1   |            |                  |       |     |
-| 2   |            |                  |       |     |
-| 3   |            |                  |       |     |
-| 4   |            |                  |       |     |
-| 5   |            |                  |       |     |
-| 6   |            |                  |       |     |
+| #   | What I saw                                                             | Where I found it                                           | Cause                                                                            | Fix                                                                                             |
+| --- | ---------------------------------------------------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| 1   | JavaScript couldn't find the HTML elements (`null`).                   | `volunteer.html`, `<head>`                                 | The script executes before the HTML elements are loaded.                         | Added `defer` to `<script>`.                                                                    |
+| 2   | User input could be interpreted as HTML.                               | `addVolunteer()`, `item.innerHTML`                         | `innerHTML` parses user input as HTML, creating an XSS risk.                     | Replaced `innerHTML` with `textContent` and created a separate `<strong>` element for the name. |
+| 3   | Empty names are not being rejected correctly.                          | `volunteer.js`, name validation inside the submit listener | Used `=` (assignment) instead of `===` (strict equality comparison).             | Changed `=` to `===` to correctly check whether the name is empty.                              |
+| 4   | A sixth volunteer could register even when all five spots were filled. | `volunteer.js`, capacity validation                        | Used `>` instead of `>=`, allowing registration when `filled` equals `maxSpots`. | Changed `>` to `>=` to reject sign-ups when all spots are filled.                               |
+| 5   | Counter could not be incremented.                                      | `volunteer.js`, `filled` declaration                       | `const` prevents reassignment.                                                   | Changed `const filled = 0` to `let filled = 0`.                                                 |
+| 6   | Form submission reloads the page.                                      | `volunteer.js`, submit event listener                      | Default form submission behaviour was not prevented.                             | Added `event.preventDefault()`.                                                                 |     |
 
 ```text
-(one red Console message I saw)
+Uncaught TypeError: can't access property "addEventListener", volunteerForm is null
+    <anonymous> http://127.0.0.1:8000/volunteer.js:20
+ volunteer.js:20:1
+    <anonymous> http://127.0.0.1:8000/volunteer.js:20
+
 ```
 
-**Breakpoint (one sentence: what did I see in the Scope panel, for example the values of filled and maxSpots, and what did it tell me?):**
+**Breakpoint (one sentence: what did I see in the Scope panel, for example the values of filled and maxSpots, and what did it tell me?):** the Scope panel showed `filled` as `0` and `maxSpots` as `5`, but `filled` could not be reassigned because it was declared with `const`, indicating why the counter could not increment.
 
 ```text
-(#volunteer-count and #volunteer-list text after the final test)
+First Volunteer: 1 of 5 spots filled Carter (Sorter)
+Empty Name: Please type your name first.
+<b>Ana</b>: Shows as plain text, 2 of 5 spots filled
+Five Volunteers: 5 of 5 spots filled Carter (Sorter)<b>Ana</b> (Sorter)John (Sorter)Jane (Sorter)James (Sorter)
+Sixth Volunteers Attempt: All spots are filled. Thank you!
 ```
 
 ```text

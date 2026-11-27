@@ -9,23 +9,30 @@ const volunteerMessage = document.querySelector("#volunteer-message");
 const countText = document.querySelector("#volunteer-count");
 
 const maxSpots = 5;
-const filled = 0;
+let filled = 0;
 
 function addVolunteer(name, role) {
   const item = document.createElement("li");
-  item.innerHTML = "<strong>" + name + "</strong> (" + role + ")";
+
+  const strong = document.createElement("strong");
+  strong.textContent = name;
+
+  item.appendChild(strong);
+  item.append(" (" + role + ")");
+
   volunteerList.appendChild(item);
 }
 
 volunteerForm.addEventListener("submit", (event) => {
+  event.preventDefault();
   let volunteerName = nameInput.value.trim();
 
-  if (volunteerName = "") {
+  if (volunteerName === "") {
     volunteerMessage.textContent = "Please type your name first.";
     return;
   }
 
-  if (filled > maxSpots) {
+  if (filled >= maxSpots) {
     volunteerMessage.textContent = "All spots are filled. Thank you!";
     return;
   }
