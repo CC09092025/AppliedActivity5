@@ -27,12 +27,15 @@ function filterItems(searchText) {
   const totalCount = elements.length;
   let itemCount = 0;
 
+  const searchQuery = searchText.toLowerCase().trim();
+
   for (const item of elements) {
     let productName = item.querySelector("h3").textContent;
     productName = productName.toLowerCase().trim();
-    const searchQuery = searchText.toLowerCase().trim();
+    let category = item.querySelector(".category").textContent;
+    category = category.toLowerCase().trim();
 
-    if (productName.includes(searchQuery)) {
+    if (productName.includes(searchQuery) || category.includes(searchQuery)) {
       item.classList.toggle("hidden", false);
       itemCount += 1;
     } else {
