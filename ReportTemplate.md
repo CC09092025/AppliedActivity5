@@ -355,7 +355,34 @@ volunteer.html: Document checking completed. No errors or warnings to show.
 ```
 
 ```text
-(git log --oneline --graph | head, then git log --oneline | wc -l : expect 16)
+~/Projects/AppliedActivity-5 main ⇡ 10s
+❯ git log --oneline --graph --all
+  git status
+*   8754bec (HEAD -> main) Merge branch 'main' of https://github.com/CC09092025/AppliedActivity5
+|\
+| *   3cb4d5b (tag: v1.0.0, origin/main, origin/HEAD) Merge pull request #2 from CC09092025/feat/harvest-board
+| |\
+* | | 62267a5 (feat/harvest-board) Update report template
+| |/
+|/|
+* | 865ed79 (origin/feat/harvest-board) Updated ReportTemplate
+* | e018b5b Resovled issues with volunteer
+* | aa1a342 Added checkbox for pledges
+* | 5a4f009 Added donation validation and submission
+* | 865f8a6 Populate the item dropdown
+* | 9487705 Implement interactive item search and filtering
+* | ce60aab Added Canned Vegetables and script.js module to index page
+* | eb89092 Updated Report Template
+|/
+* 8e37baa Add README for Harvest Board
+* b33616d Added initial files
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+~/Projects/AppliedActivity-5 feat/harvest-board*
+❯ git log --oneline | wc -l
+13
 ```
 
 - Repository: https://github.com/CC09092025/AppliedActivity5/
@@ -369,11 +396,15 @@ volunteer.html: Document checking completed. No errors or warnings to show.
 
 ## Mission 6: Reflection
 
-1. **Events (my own analogy):**
-2. **Validation:**
-3. **Reading errors:**
-4. **Pick the right tool:** (a) ... (b) ... (c) ... (d) ... (e) ...
-5. **Beyond class:**
+1\. **Events:** An event listener is like a doorbell that waits for someone to press it before doing something. I used `input`, `submit`, and `change` events to wait for typing, form submission, and checkbox changes.
+
+2\. **Validation:** `=== ""` allows three spaces because spaces are not an empty string. A form should also reject negative quantities. Browser validation alone is insufficient because someone could bypass the page and send invalid data directly to the server.
+
+3\. **Reading errors:** `Cannot read properties of null` means JavaScript tried to use an element that wasn't found. I encountered this when a script ran before the HTML loaded and when a selector didn't match an existing element.
+
+4\. **Pick the right tool:** (a) Console and inspect the submit listener for missing `preventDefault()`. (b) Console, check the values used in the calculation. (c) Debugger with a breakpoint. (d) Debugger to step through the code. (e) W3C HTML Validator.
+
+5\. **Beyond class:** I would use a live filter in my PhishBERT project to search and filter phishing email samples. The least clear concept to me is event propagation.
 
 ## Bonus (optional): Level Up
 
