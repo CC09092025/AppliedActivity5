@@ -408,6 +408,28 @@ Your branch is ahead of 'origin/main' by 2 commits.
 
 ## Bonus (optional): Level Up
 
-```text
-(challenge, code and Console proof)
+Search Including Categories
+
 ```
+"Grains": Showing 2 of 7 items (Rice and Pasta)
+"Pantry": Showing 3 of 7 items (Canned beans, Canned tomatoes, Canned vegetables)
+```
+
+Clearing Received Pledges
+Before:
+
+```text
+Total pledged: 25 items
+Received: 2 of 3 pledges
+```
+
+After
+
+```text
+Total pledged: 8 items
+Received: 0 of 1 pledges
+```
+
+Disabled Sign Up
+<5 sign ups: "Claim my spot" is active
+=5 sign ups: "Claim my spot" is disabled, preventing further signups without having to check count when button is pressed

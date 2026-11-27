@@ -56,6 +56,12 @@ input[type="text"], select { width: 100%; max-width: 24rem; border: 1px solid va
   cursor: pointer;
 }
 
+.btn:disabled {
+  background-color: var(--color-border);
+  color: var(--color-text);
+  cursor: not-allowed;
+}
+
 .card {
   padding: var(--spacing-unit);
   background-color: var(--color-surface);

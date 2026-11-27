@@ -11,6 +11,7 @@ const donationMessage = document.querySelector("#donation-message");
 const donationList = document.querySelector("#donation-list");
 const totalPledgedElement = document.querySelector("#total-pledged");
 const receivedCountElement = document.querySelector("#received-count");
+const clearReceivedButton = document.querySelector("#clear-received");
 
 let totalPledged = 0;
 
@@ -27,12 +28,15 @@ function filterItems(searchText) {
   const totalCount = elements.length;
   let itemCount = 0;
 
+  const searchQuery = searchText.toLowerCase().trim();
+
   for (const item of elements) {
     let productName = item.querySelector("h3").textContent;
     productName = productName.toLowerCase().trim();
-    const searchQuery = searchText.toLowerCase().trim();
+    let category = item.querySelector(".category").textContent;
+    category = category.toLowerCase().trim();
 
-    if (productName.includes(searchQuery)) {
+    if (productName.includes(searchQuery) || category.includes(searchQuery)) {
       item.classList.toggle("hidden", false);
       itemCount += 1;
     } else {
@@ -60,6 +64,19 @@ function updateTallies() {
   totalPledgedElement.textContent = `Total pledged: ${totalPledged} items`;
   receivedCountElement.textContent = `Received: ${receivedCount} of ${pledges.length} pledges`;
 }
+
+function clearReceivedPledges() {
+  const received = donationList.querySelectorAll("li.done");
+
+  for (const pledge of received) {
+    totalPledged -= Number(pledge.dataset.quantity);
+    pledge.remove();
+  }
+
+  updateTallies();
+}
+
+clearReceivedButton.addEventListener("click", clearReceivedPledges);
 
 search.addEventListener("input", () => {
   filterItems(search.value);
@@ -102,6 +119,7 @@ donationForm.addEventListener("submit", (event) => {
   donationMessage.textContent = "";
 
   const pledge = document.createElement("li");
+  pledge.dataset.quantity = quantity;
 
   const label = document.createElement("label");
 
