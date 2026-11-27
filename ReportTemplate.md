@@ -358,14 +358,14 @@ volunteer.html: Document checking completed. No errors or warnings to show.
 (git log --oneline --graph | head, then git log --oneline | wc -l : expect 16)
 ```
 
-- Repository: https://github.com/...
-- Issue #1 (closed): https://github.com/...
-- Merged Pull Request: https://github.com/...
-- Release v1.0.0: https://github.com/...
+- Repository: https://github.com/CC09092025/AppliedActivity5/
+- Issue #1 (closed): https://github.com/CC09092025/AppliedActivity5/issues/1
+- Merged Pull Request: https://github.com/CC09092025/AppliedActivity5/pull/2
+- Release v1.0.0: https://github.com/CC09092025/AppliedActivity5/releases/tag/v1.0.0
 
-**Explain (what did Closes #1 do?):**
+**Explain (what did Closes #1 do?):** automatically closes GitHub Issue #1 when the pull request is merged into the default branch.
 
-**Explain (git pull is a shortcut for which two commands?):**
+**Explain (git pull is a shortcut for which two commands?):** `git pull` is a shortcut for `git fetch` followed by `git merge`. It downloads the latest remote changes and merges them into the current local branch.
 
 ## Mission 6: Reflection
 
