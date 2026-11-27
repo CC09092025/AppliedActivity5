@@ -7,6 +7,7 @@ const roleSelect = document.querySelector("#volunteer-role");
 const volunteerList = document.querySelector("#volunteer-list");
 const volunteerMessage = document.querySelector("#volunteer-message");
 const countText = document.querySelector("#volunteer-count");
+const submitButton = volunteerForm.querySelector("button[type='submit']");
 
 const maxSpots = 5;
 let filled = 0;
@@ -41,5 +42,11 @@ volunteerForm.addEventListener("submit", (event) => {
   addVolunteer(volunteerName, roleSelect.value);
   filled = filled + 1;
   countText.textContent = filled + " of " + maxSpots + " spots filled";
+
+  if (filled >= maxSpots) {
+    submitButton.disabled = true;
+    volunteerMessage.textContent = "All spots are filled. Thank you!";
+  }
+
   nameInput.value = "";
 });
