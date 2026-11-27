@@ -320,21 +320,34 @@ Sixth Volunteers Attempt: All spots are filled. Thank you!
 ```
 
 ```text
-(git log --oneline)
+~/Projects/AppliedActivity-5 feat/harvest-board*
+❯ git log --oneline
+e018b5b (HEAD -> feat/harvest-board) Resovled issues with volunteer
+aa1a342 Added checkbox for pledges
+5a4f009 Added donation validation and submission
+865f8a6 Populate the item dropdown
+9487705 Implement interactive item search and filtering
+ce60aab Added Canned Vegetables and script.js module to index page
+eb89092 (main) Updated Report Template
+8e37baa (origin/main) Add README for Harvest Board
+b33616d Added initial files
 ```
 
-**Explain (which bug gave no red message, and how did I find it?):**
+**Explain (which bug gave no red message, and how did I find it?):** The missing `event.preventDefault()` caused the page to reload instead of displaying the validation message; I found it by comparing the volunteer form's submit listener with my working donation form.
 
 **Checkpoint 4 (expect 15):**
 
 ```text
-(paste)
+~/Projects/AppliedActivity-5 feat/harvest-board*
+❯ git log --oneline | wc -l
+9
 ```
 
 ## Mission 5: Publish and Release
 
 ```text
-(validator result for index.html and volunteer.html)
+index.html: Document checking completed. No errors or warnings to show.
+volunteer.html: Document checking completed. No errors or warnings to show.
 ```
 
 ```text
